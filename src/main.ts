@@ -17,7 +17,8 @@ async function bootstrap() {
       process.env.FRONTEND_URL,
       'http://localhost:3000',
       'https://backer-creator-dev.up.railway.app',
-      'https://backer-creator-backend.onrender.com'
+      'https://backer-creator-backend.onrender.com',
+      'https://gosowapp-production.up.railway.app/'
     ].filter(Boolean),
     credentials: true,
   });
