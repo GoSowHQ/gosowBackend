@@ -12,15 +12,33 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   app.use(helmet());
+  // app.enableCors({
+  //   origin: [
+  //     "*",
+  //     process.env.FRONTEND_URL,
+  //     'http://localhost:3000',
+  //     'https://backer-creator-dev.up.railway.app',
+  //     'https://backer-creator-backend.onrender.com',
+  //     'https://gosowapp-production.up.railway.app/'
+  //   ].filter(Boolean),
+  //   credentials: true,
+  // });
+
+  const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    'http://localhost:3000',
+    'https://gosowapp-production.up.railway.app/'
+  ].filter(Boolean);
+
   app.enableCors({
-    origin: [
-      "*",
-      process.env.FRONTEND_URL,
-      'http://localhost:3000',
-      'https://backer-creator-dev.up.railway.app',
-      'https://backer-creator-backend.onrender.com',
-      'https://gosowapp-production.up.railway.app/'
-    ].filter(Boolean),
+    origin: (origin, callback) => {
+      // Allow non-browser requests (no origin) or whitelisted ones
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 
