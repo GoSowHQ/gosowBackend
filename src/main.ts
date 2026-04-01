@@ -14,6 +14,7 @@ async function bootstrap() {
   app.use(helmet());
   app.enableCors({
     origin: [
+      "*",
       process.env.FRONTEND_URL,
       'http://localhost:3000',
       'https://backer-creator-dev.up.railway.app',

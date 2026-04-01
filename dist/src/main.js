@@ -16,6 +16,7 @@ async function bootstrap() {
     app.use((0, helmet_1.default)());
     app.enableCors({
         origin: [
+            "*",
             process.env.FRONTEND_URL,
             'http://localhost:3000',
             'https://backer-creator-dev.up.railway.app',
