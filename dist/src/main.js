@@ -14,20 +14,9 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, { rawBody: true });
     app.setGlobalPrefix('api');
     app.use((0, helmet_1.default)());
-    const allowedOrigins = [
-        "*",
-        'http://localhost:3000',
-        'https://gosowapp-production.up.railway.app/'
-    ].filter(Boolean);
     app.enableCors({
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            }
-            else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
+        origin: '*',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         credentials: true,
     });
     app.useGlobalInterceptors(new response_interceptor_1.TransformInterceptor());

@@ -24,21 +24,9 @@ async function bootstrap() {
   //   credentials: true,
   // });
 
-  const allowedOrigins = [
-    "*",
-    'http://localhost:3000',
-    'https://gosowapp-production.up.railway.app/'
-  ].filter(Boolean);
-
   app.enableCors({
-    origin: (origin, callback) => {
-      // Allow non-browser requests (no origin) or whitelisted ones
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
 
