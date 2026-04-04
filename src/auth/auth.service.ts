@@ -5,7 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { AuthProvider } from '@prisma/client';
+import { AuthProvider, UserRole } from '@prisma/client';
 import { WalletsService } from '../wallets/wallets.service';
 import { createServiceResponse, ServiceResponse } from '../common/types/service-response.type';
 
@@ -18,7 +18,7 @@ export class AuthService {
     private jwt: JwtService,
     private config: ConfigService,
     private walletsService: WalletsService,
-  ) {}
+  ) { }
 
   async register(dto: RegisterDto): Promise<ServiceResponse> {
     this.logger.log(`Registration attempt for email: ${dto.email}`);
@@ -34,6 +34,7 @@ export class AuthService {
         email: dto.email,
         passwordHash,
         name: dto.name,
+        role: dto.role,
       },
     });
 

@@ -76,6 +76,7 @@ let AuthService = AuthService_1 = class AuthService {
                 email: dto.email,
                 passwordHash,
                 name: dto.name,
+                role: dto.role,
             },
         });
         await this.walletsService.createWallet(user.id);
